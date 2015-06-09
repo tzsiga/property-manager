@@ -18,8 +18,12 @@
 @import "bootstrap";
 
 body {
-
   #content {
     margin-top: 5em;
+
+    form {
+      padding-top: 1em;
+      padding-bottom: 1em;
+    }
   }
 }

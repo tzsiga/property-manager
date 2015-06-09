@@ -2,8 +2,6 @@ Rails.application.routes.draw do
 
   get 'pages/home'
 
-  get 'pages/welcome'
-
   resources :reservations
   resources :properties
   resources :users
