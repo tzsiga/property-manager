@@ -1,29 +1,51 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Rooms:</strong>
-  <%= @property.rooms %>
-</p>
+<div class="show">
+  <div class="row">
+    <div class="col-sm-2">
+      <strong>Rooms:</strong>
+    </div>
+    <div class="col-sm-10">
+      <%= @property.rooms %>
+    </div>
+  </div>
 
-<p>
-  <strong>Facilities:</strong>
-  <%= @property.facilities %>
-</p>
+  <div class="row">
+    <div class="col-sm-2">
+      <strong>Facilities:</strong>
+    </div>
+    <div class="col-sm-10">
+    <%= @property.facilities %>
+  </div>
+  </div>
 
-<p>
-  <strong>category:</strong>
-  <%= @property.category %>
-</p>
+  <div class="row">
+    <div class="col-sm-2">
+      <strong>Category:</strong>
+    </div>
+    <div class="col-sm-10">
+      <%= @property.category %>
+    </div>
+  </div>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @property.rating %>
-</p>
+  <div class="row">
+    <div class="col-sm-2">
+      <strong>Rating:</strong>
+    </div>
+    <div class="col-sm-10">
+      <%= @property.rating %>
+    </div>
+  </div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @property.address %>
-</p>
+  <div class="row">
+    <div class="col-sm-2">
+      <strong>Address:</strong>
+    </div>
+    <div class="col-sm-10">
+      <%= @property.address %>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_property_path(@property) %> |
 <%= link_to 'Back', properties_path %>

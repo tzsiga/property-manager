@@ -1,4 +1,5 @@
 <%= form_for(@property, :html => {:class => 'form-horizontal', :role => "form"}) do |f| %>
+
   <% if @property.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved:</h2>
@@ -9,36 +10,42 @@
       </ul>
     </div>
   <% end %>
+
   <div class="form-group">
     <%= f.label(:rooms, class: 'control-label col-sm-2') %>
     <div class="col-sm-8">
       <%= f.number_field(:rooms, class: 'form-control', placeholder: 'number of rooms') %>
     </div>
   </div>
+
   <div class="form-group">
     <%= f.label(:facilities, class: 'control-label col-sm-2') %>
     <div class="col-sm-8">
       <%= f.text_field(:facilities, class: 'form-control', placeholder: 'kitchen, swimming pool, library...') %>
     </div>
   </div>
+
   <div class="form-group">
     <%= f.label(:category, class: 'control-label col-sm-2') %>
     <div class="col-sm-8">
       <%= f.text_field(:category, class: 'form-control', placeholder: 'house, flat, mansion...') %>
     </div>
   </div>
+
   <div class="form-group">
     <%= f.label(:rating, class: 'control-label col-sm-2') %>
     <div class="col-sm-8">
       <%= f.number_field(:rating, class: 'form-control', placeholder: 'from 1 to 5') %>
     </div>
   </div>
+
   <div class="form-group">
     <%= f.label(:address, class: 'control-label col-sm-2') %>
     <div class="col-sm-8">
       <%= f.text_field(:address, class: 'form-control', placeholder: 'zip code, city, street, number') %>
     </div>
   </div>
+  
   <div class="actions">
     <%= f.submit(:class => 'btn btn-success') %>
   </div>
