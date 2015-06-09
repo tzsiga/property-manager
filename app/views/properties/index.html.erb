@@ -2,12 +2,12 @@
 
 <h1>Listing Properties</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Rooms</th>
       <th>Facilities</th>
-      <th>Type</th>
+      <th>Category</th>
       <th>Rating</th>
       <th>Address</th>
       <th colspan="3"></th>
@@ -19,7 +19,7 @@
       <tr>
         <td><%= property.rooms %></td>
         <td><%= property.facilities %></td>
-        <td><%= property.type %></td>
+        <td><%= property.category %></td>
         <td><%= property.rating %></td>
         <td><%= property.address %></td>
         <td><%= link_to 'Show', property %></td>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Property', new_property_path %>
+<%= link_to 'New Property', new_property_path, class: 'btn btn-info' %>

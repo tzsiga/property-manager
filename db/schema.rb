@@ -16,11 +16,11 @@ ActiveRecord::Schema.define(version: 20150609123551) do
   create_table "properties", force: :cascade do |t|
     t.integer  "rooms",      limit: 4
     t.string   "facilities", limit: 255
-    t.string   "type",       limit: 255
+    t.string   "category",   limit: 255
     t.integer  "rating",     limit: 4
     t.string   "address",    limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20150609123551) do
     t.string   "email",      limit: 255
     t.string   "first_name", limit: 255
     t.string   "last_name",  limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

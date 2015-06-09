@@ -3,11 +3,11 @@ class CreateProperties < ActiveRecord::Migration
     create_table :properties do |t|
       t.integer :rooms
       t.string :facilities
-      t.string :type
+      t.string :category
       t.integer :rating
       t.string :address
 
-      t.timestamps null: false
+      t.timestamps null: true
     end
   end
 end
