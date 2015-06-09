@@ -12,6 +12,13 @@
   <% end %>
 
   <div class="form-group">
+    <%= f.label(:name, class: 'control-label col-sm-2') %>
+    <div class="col-sm-8">
+      <%= f.text_field(:name, class: 'form-control', placeholder: 'property name') %>
+    </div>
+  </div>
+
+  <div class="form-group">
     <%= f.label(:rooms, class: 'control-label col-sm-2') %>
     <div class="col-sm-8">
       <%= f.number_field(:rooms, class: 'form-control', placeholder: 'number of rooms') %>
@@ -45,7 +52,7 @@
       <%= f.text_field(:address, class: 'form-control', placeholder: 'zip code, city, street, number') %>
     </div>
   </div>
-  
+
   <div class="actions">
     <%= f.submit(:class => 'btn btn-success') %>
   </div>

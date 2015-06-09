@@ -5,6 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Name</th>
       <th>Rooms</th>
       <th>Facilities</th>
       <th>Category</th>
@@ -16,6 +17,7 @@
   <tbody>
     <% @properties.each do |property| %>
       <tr>
+        <td><%= property.name %></td>
         <td><%= property.rooms %></td>
         <td><%= property.facilities %></td>
         <td><%= property.category %></td>

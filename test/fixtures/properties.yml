@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  name: MyString
   rooms: 1
   facilities: MyString
-  type: 
+  category: MyString
   rating: 1
   address: MyString
 
 two:
+  name: MyString
   rooms: 1
   facilities: MyString
-  type: 
+  category: MyString
   rating: 1
   address: MyString
