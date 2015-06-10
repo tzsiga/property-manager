@@ -1,25 +1,48 @@
 <% provide(:title, "Reservation details") %>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Property:</strong>
-  <%= @reservation.property_id %>
-</p>
+<%
+  resProperty = Property.find(@reservation.property_id)
+  resUser = User.find(@reservation.user_id)
+%>
 
-<p>
-  <strong>From:</strong>
-  <%= @reservation.from %>
-</p>
+<div class="show">
+  <div class="row">
+    <div class="col-sm-2">
+      <strong>Property:</strong>
+    </div>
+    <div class="col-sm-10">
+      <%= resProperty.name %>
+    </div>
+  </div>
 
-<p>
-  <strong>To:</strong>
-  <%= @reservation.to %>
-</p>
+  <div class="row">
+    <div class="col-sm-2">
+      <strong>From:</strong>
+    </div>
+    <div class="col-sm-10">
+      <%= Time.at(@reservation.from).strftime("%Y-%m-%d %H:%M:%S") %>
+    </div>
+  </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @reservation.user_id %>
-</p>
+  <div class="row">
+    <div class="col-sm-2">
+      <strong>To:</strong>
+    </div>
+    <div class="col-sm-10">
+      <%= Time.at(@reservation.to).strftime("%Y-%m-%d %H:%M:%S") %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <strong>User:</strong>
+    </div>
+    <div class="col-sm-10">
+      <%= resUser.first_name + " " + resUser.last_name %>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_reservation_path(@reservation) %> |
 <%= link_to 'Back', reservations_path %>
