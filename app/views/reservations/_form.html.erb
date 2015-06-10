@@ -15,7 +15,7 @@
   <div class="form-group">
     <%= f.label(:property_id, class: 'control-label col-sm-2') %>
     <div class="col-sm-8">
-      <%= f.number_field(:property_id, class: 'form-control', placeholder: '') %>
+      <%= collection_select(:reservation, :property_id, Property.all, :id, :name) %>
     </div>
   </div>
 
@@ -36,7 +36,7 @@
   <div class="form-group">
     <%= f.label(:user_id, class: 'control-label col-sm-2') %>
     <div class="col-sm-8">
-      <%= f.number_field(:user_id, class: 'form-control', placeholder: '') %>
+      <%= collection_select(:reservation, :user_id, User.all, :id, :email) %>
     </div>
   </div>
 
