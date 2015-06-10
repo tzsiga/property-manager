@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609220406) do
+ActiveRecord::Schema.define(version: 20150610072151) do
 
   create_table "properties", force: :cascade do |t|
     t.string  "name",       limit: 255
@@ -35,11 +35,13 @@ ActiveRecord::Schema.define(version: 20150609220406) do
   add_index "reservations", ["user_id"], name: "index_reservations_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",      limit: 255
+    t.string   "email",      limit: 255, null: false
     t.string   "first_name", limit: 255
     t.string   "last_name",  limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
