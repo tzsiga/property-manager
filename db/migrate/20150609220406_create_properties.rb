@@ -7,8 +7,6 @@ class CreateProperties < ActiveRecord::Migration
       t.string :category
       t.integer :rating
       t.string :address
-
-      t.timestamps null: false
     end
   end
 end

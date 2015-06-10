@@ -1,5 +1,6 @@
 class Reservation < ActiveRecord::Base
-  #belongs_to :property, :user
+  belongs_to :user
+  belongs_to :property
   validates :from, presence: true
   validates :to, presence: true
 end

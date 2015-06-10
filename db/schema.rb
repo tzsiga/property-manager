@@ -14,14 +14,12 @@
 ActiveRecord::Schema.define(version: 20150609220406) do
 
   create_table "properties", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.integer  "rooms",      limit: 4
-    t.string   "facilities", limit: 255
-    t.string   "category",   limit: 255
-    t.integer  "rating",     limit: 4
-    t.string   "address",    limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string  "name",       limit: 255
+    t.integer "rooms",      limit: 4
+    t.string  "facilities", limit: 255
+    t.string  "category",   limit: 255
+    t.integer "rating",     limit: 4
+    t.string  "address",    limit: 255
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -33,12 +31,15 @@ ActiveRecord::Schema.define(version: 20150609220406) do
     t.datetime "updated_at",            null: false
   end
 
+  add_index "reservations", ["property_id"], name: "index_reservations_on_property_id", using: :btree
+  add_index "reservations", ["user_id"], name: "index_reservations_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",      limit: 255
     t.string   "first_name", limit: 255
     t.string   "last_name",  limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
