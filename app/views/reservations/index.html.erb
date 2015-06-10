@@ -21,8 +21,8 @@
       %>
       <tr>
         <td><%= resProperty.name %></td>
-        <td><%= reservation.from %></td>
-        <td><%= reservation.to %></td>
+        <td><%= Time.at(reservation.from).strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td><%= Time.at(reservation.to).strftime("%Y-%m-%d %H:%M:%S") %></td>
         <td><%= resUser.first_name + " " + resUser.last_name %></td>
         <td><%= link_to 'Show', reservation %></td>
         <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
