@@ -38,3 +38,10 @@ userList.each do |email, first_name, last_name|
     last_name: last_name
   )
 end
+
+Reservation.create(
+  property_id: Property.first.id,
+  from: Time.now,
+  to: Time.now + (7 * 24 * 3600),
+  user_id: User.first.id
+)

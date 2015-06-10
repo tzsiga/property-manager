@@ -5,6 +5,8 @@ class ReservationsController < ApplicationController
   # GET /reservations.json
   def index
     @reservations = Reservation.all
+    #@properties = Property.all
+    #@users = User.all
   end
 
   # GET /reservations/1

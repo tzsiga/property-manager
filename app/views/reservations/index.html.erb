@@ -15,11 +15,15 @@
   </thead>
   <tbody>
     <% @reservations.each do |reservation| %>
+      <%
+        resProperty = Property.find(reservation.property_id)
+        resUser = User.find(reservation.user_id)
+      %>
       <tr>
-        <td><%= reservation.property_id %></td>
+        <td><%= resProperty.name %></td>
         <td><%= reservation.from %></td>
         <td><%= reservation.to %></td>
-        <td><%= reservation.user_id %></td>
+        <td><%= resUser.first_name + " " + resUser.last_name %></td>
         <td><%= link_to 'Show', reservation %></td>
         <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
         <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
