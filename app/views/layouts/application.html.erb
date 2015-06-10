@@ -1,32 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PropertyManager</title>
+  <title><%= yield(:title) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= render 'shared/navbar' %>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <%= link_to 'Property Manager', {:controller => 'pages', :action => 'home'}, :class => 'navbar-brand' %>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <%# <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> %>
-        <li><%= link_to 'Properties', {:controller => 'properties', :action => 'index'} %></li>
-        <li><%= link_to 'Reservations', {:controller => 'reservations', :action => 'index'} %></li>
-        <li><%= link_to 'Users', {:controller => 'users', :action => 'index'} %></li>
-      </ul>
-    </div>
+  <div class="container" id="content">
+    <%= yield %>
   </div>
-</nav>
-
-<div class="container" id="content">
-  <%= yield %>
-</div>
-
 </body>
 </html>

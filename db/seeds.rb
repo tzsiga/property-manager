@@ -11,7 +11,7 @@ propertyList = [
   ["Death Star", 10000, "throne room, super laser, hangar", "space station", 5, "in a galaxy, far far away"],
   ["Star Labs", 130, "particle accelerator, secret room", "mansion", 4, "Central City, Downtown str. 28."],
   ["Batcave", 1, "garage, computer room, armory", "cave", 5, "under the Wayne mansion"],
-  ["Coppola Estate", 66, "armory, kitchen, garage, swimming pool", "mansion", 5, "321 Little Italy, Via Appia"],
+  ["Coppola Estate", 66, "armory, kitchen, garage, swimming pool", "mansion", 5, "321 Little Italy, Via Appia"]
 ]
 
 propertyList.each do |name, rooms, facilities, category, rating, address|
