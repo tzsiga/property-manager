@@ -9,4 +9,6 @@ end
 class User < ActiveRecord::Base
   has_many :reservations
   validates :email, presence: true, uniqueness: true, email: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 end

@@ -3,7 +3,6 @@
   <% if @reservation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
-
       <ul>
       <% @reservation.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -26,7 +25,7 @@
     </div>
     <script type="text/javascript">
       $('#from-date').datepicker({
-        format: "yyyy.mm.dd",
+        format: "yyyy-mm-dd 00:00:00",
         orientation: "top left",
         keyboardNavigation: false,
         autoclose: true,
@@ -42,7 +41,7 @@
     </div>
     <script type="text/javascript">
       $('#to-date').datepicker({
-        format: "yyyy.mm.dd",
+        format: "yyyy-mm-dd 00:00:00",
         orientation: "top left",
         keyboardNavigation: false,
         autoclose: true,

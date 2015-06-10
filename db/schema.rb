@@ -14,32 +14,28 @@
 ActiveRecord::Schema.define(version: 20150610072151) do
 
   create_table "properties", force: :cascade do |t|
-    t.string  "name",       limit: 255
-    t.integer "rooms",      limit: 4
-    t.string  "facilities", limit: 255
-    t.string  "category",   limit: 255
-    t.integer "rating",     limit: 4
-    t.string  "address",    limit: 255
+    t.string  "name",       limit: 255, null: false
+    t.integer "rooms",      limit: 4,   null: false
+    t.string  "facilities", limit: 255, null: false
+    t.string  "category",   limit: 255, null: false
+    t.integer "rating",     limit: 4,   null: false
+    t.string  "address",    limit: 255, null: false
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.integer  "property_id", limit: 4
-    t.integer  "from",        limit: 4
-    t.integer  "to",          limit: 4
-    t.integer  "user_id",     limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "property_id", limit: 4, null: false
+    t.datetime "from",                  null: false
+    t.datetime "to",                    null: false
+    t.integer  "user_id",     limit: 4, null: false
   end
 
   add_index "reservations", ["property_id"], name: "index_reservations_on_property_id", using: :btree
   add_index "reservations", ["user_id"], name: "index_reservations_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",      limit: 255, null: false
-    t.string   "first_name", limit: 255
-    t.string   "last_name",  limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string "email",      limit: 255, null: false
+    t.string "first_name", limit: 255, null: false
+    t.string "last_name",  limit: 255, null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

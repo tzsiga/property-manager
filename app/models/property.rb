@@ -1,6 +1,6 @@
 class Property < ActiveRecord::Base
   has_many :reservations
-  validates :name, length: { minimum: 3 }
+  validates :name, presence: true
   validates :rooms, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :facilities, presence: true
   validates :category, presence: true
