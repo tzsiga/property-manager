@@ -43,7 +43,7 @@ end
 
 Reservation.create(
   property_id: Property.first.id,
-  from: Time.now,
-  to: Time.now + (7 * 24 * 3600),
+  from: Time.now.utc.in_time_zone('CET'),
+  to: Time.now.utc.in_time_zone('CET') + (7 * 24 * 3600),
   user_id: User.last.id
 )

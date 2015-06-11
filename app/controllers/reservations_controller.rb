@@ -26,16 +26,41 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    @reservation = Reservation.new(reservation_params)
+    prop = Property.find(reservation_params[:property_id])
+    from = Time.parse(reservation_params[:from])
+    to = Time.parse(reservation_params[:to])
 
-    respond_to do |format|
-      if @reservation.save
-        format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
-        format.json { render :show, status: :created, location: @reservation }
-      else
-        format.html { render :new }
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
+    # error check
+    if (from > to)
+      respond_to do |format|
+        format.html { redirect_to reservations_url, notice: "Error: from > to" }
+        msg = { :status => "error", :message => "Error: from > to" }
+        format.json { render :json => msg }
       end
+    elsif (from < Time.now)
+      respond_to do |format|
+        format.html { redirect_to reservations_url, notice: "Error: from < now" }
+        msg = { :status => "error", :message => "Error: from < now" }
+        format.json { render :json => msg }
+      end
+
+    # check if overlap:
+    # 1. find all reservations for prop
+    # 2. check if from|to not overlap with all reservations
+
+    else
+      @reservation = Reservation.new(reservation_params)
+
+      respond_to do |format|
+        if @reservation.save
+          format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
+          format.json { render :show, status: :created, location: @reservation }
+        else
+          format.html { render :new }
+          format.json { render json: @reservation.errors, status: :unprocessable_entity }
+        end
+      end
+
     end
   end
 
