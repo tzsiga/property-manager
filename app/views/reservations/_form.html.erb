@@ -21,16 +21,13 @@
   <div class="form-group">
     <%= f.label(:from, class: 'control-label col-sm-2') %>
     <div class="col-sm-4">
-      <%= f.text_field(:from, class: 'form-control', id: 'from-date') %>
+      <%= f.datetime_select(:from) %>
     </div>
     <script type="text/javascript">
-      $('#from-date').datepicker({
-        format: "yyyy-mm-dd 00:00:00",
-        orientation: "top left",
-        keyboardNavigation: false,
-        todayHighlight: true,
-        autoclose: true,
-        toggleActive: true
+      $(function () {
+        $('#reservation_from').datetimepicker({
+          format: 'YYYY-MM-DD HH:mm:ss'
+        });
       });
     </script>
   </div>
@@ -38,16 +35,13 @@
   <div class="form-group">
     <%= f.label(:to, class: 'control-label col-sm-2') %>
     <div class="col-sm-4">
-      <%= f.text_field(:to, class: 'form-control', id: 'to-date') %>
+      <%= f.datetime_select(:to) %>
     </div>
     <script type="text/javascript">
-      $('#to-date').datepicker({
-        format: "yyyy-mm-dd 00:00:00",
-        orientation: "top left",
-        keyboardNavigation: false,
-        todayHighlight: true,
-        autoclose: true,
-        toggleActive: true
+      $(function () {
+        $('#reservation_to').datetimepicker({
+          format: 'YYYY-MM-DD HH:mm:ss'
+        });
       });
     </script>
   </div>
