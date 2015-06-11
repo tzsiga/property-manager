@@ -24,42 +24,48 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    prop = Property.find(reservation_params[:property_id])
-    from = Time.parse(reservation_params[:from])
-    to = Time.parse(reservation_params[:to])
-
-    # error check
-    if (from > to)
+    if (reservation_params[:from].empty? or reservation_params[:to].empty?)
       respond_to do |format|
-        format.html { redirect_to reservations_url, notice: "Error: from > to" }
-        msg = { :status => "error", :message => "Error: from > to" }
-        format.json { render :json => msg }
-      end
-    elsif (from < Time.now)
-      respond_to do |format|
-        format.html { redirect_to reservations_url, notice: "Error: from < now" }
-        msg = { :status => "error", :message => "Error: from < now" }
-        format.json { render :json => msg }
-      end
-    elsif (isReservationsOverlaps(Reservation.where(property: prop), from, to))
-      respond_to do |format|
-        format.html { redirect_to reservations_url, notice: "Error: overlap" }
-        msg = { :status => "error", :message => "Error: overlap" }
+        format.html { redirect_to reservations_url, notice: "Error: missing date" }
+        msg = { :status => "error", :message => "Error: missing date" }
         format.json { render :json => msg }
       end
     else
-      @reservation = Reservation.new(reservation_params)
+      prop = Property.find(reservation_params[:property_id])
+      from = Time.parse(reservation_params[:from])
+      to = Time.parse(reservation_params[:to])
 
-      respond_to do |format|
-        if @reservation.save
-          format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
-          format.json { render :show, status: :created, location: @reservation }
-        else
-          format.html { render :new }
-          format.json { render json: @reservation.errors, status: :unprocessable_entity }
+      if (from > to)
+        respond_to do |format|
+          format.html { redirect_to reservations_url, notice: "Error: from > to" }
+          msg = { :status => "error", :message => "Error: from > to" }
+          format.json { render :json => msg }
+        end
+      elsif (from < Time.now)
+        respond_to do |format|
+          format.html { redirect_to reservations_url, notice: "Error: from < now" }
+          msg = { :status => "error", :message => "Error: from < now" }
+          format.json { render :json => msg }
+        end
+      elsif (isReservationsOverlaps(Reservation.where(property: prop), from, to))
+        respond_to do |format|
+          format.html { redirect_to reservations_url, notice: "Error: overlap" }
+          msg = { :status => "error", :message => "Error: overlap" }
+          format.json { render :json => msg }
+        end
+      else
+        @reservation = Reservation.new(reservation_params)
+
+        respond_to do |format|
+          if @reservation.save
+            format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
+            format.json { render :show, status: :created, location: @reservation }
+          else
+            format.html { render :new }
+            format.json { render json: @reservation.errors, status: :unprocessable_entity }
+          end
         end
       end
-
     end
   end
 
