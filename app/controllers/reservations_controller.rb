@@ -43,11 +43,12 @@ class ReservationsController < ApplicationController
         msg = { :status => "error", :message => "Error: from < now" }
         format.json { render :json => msg }
       end
-
-    # check if overlap:
-    # 1. find all reservations for prop
-    # 2. check if from|to not overlap with all reservations
-
+    elsif (isReservationsOverlaps(Reservation.where(property: prop), from, to))
+      respond_to do |format|
+        format.html { redirect_to reservations_url, notice: "Error: overlap" }
+        msg = { :status => "error", :message => "Error: overlap" }
+        format.json { render :json => msg }
+      end
     else
       @reservation = Reservation.new(reservation_params)
 
@@ -97,5 +98,24 @@ class ReservationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def reservation_params
       params.require(:reservation).permit(:property_id, :from, :to, :user_id)
+    end
+
+    def isOverlaps (from_o, to_o, from_n, to_n)
+      if (Time.at(from_n).between?(Time.at(from_o), Time.at(to_o)) ||
+          Time.at(to_n).between?(Time.at(from_o), Time.at(to_o)) )
+          return true
+      end
+      return false
+    end
+
+    def isReservationsOverlaps (reservations, from, to)
+      reservations.each do |res|
+        if !isOverlaps(res.from, res.to, from, to)
+          next
+        else
+          return true
+        end
+      end
+      return false
     end
 end
