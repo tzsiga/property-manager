@@ -24,17 +24,26 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
-    errorMessages = {
+    htmlMessages = {
       missingDate: "Missing From / To date(s)!",
       fromGreater: "To date cannot precede From date!",
       fromPast: "From date cannot be in the past! You can only make reservations in the future!",
-      overlap: "The property is already booked in that timeframe!"
+      overlap: "The property is already booked in that timeframe!",
+      success: "Reservation was successfully created."
+    }
+
+    jsonMessages = {
+      missingDate: "Missing From / To date(s)!",
+      fromGreater: "To date cannot precede From date!",
+      fromPast: "From date cannot be in the past!",
+      overlap: "Not available!",
+      success: "Booked!"
     }
 
     if (reservation_params[:from].empty? or reservation_params[:to].empty?)
       respond_to do |format|
-        format.html { redirect_to reservations_url, alert: errorMessages[:missingDate] }
-        msg = { :status => "error", :message => errorMessages[:missingDate] }
+        format.html { redirect_to reservations_url, alert: htmlMessages[:missingDate] }
+        msg = { :status => "error", :message => jsonMessages[:missingDate] }
         format.json { render :json => msg }
       end
     else
@@ -44,20 +53,20 @@ class ReservationsController < ApplicationController
 
       if (from > to)
         respond_to do |format|
-          format.html { redirect_to reservations_url, alert: errorMessages[:fromGreater] }
-          msg = { :status => "error", :message => errorMessages[:fromGreater] }
+          format.html { redirect_to reservations_url, alert: htmlMessages[:fromGreater] }
+          msg = { :status => "error", :message => jsonMessages[:fromGreater] }
           format.json { render :json => msg }
         end
       elsif (from < Time.now)
         respond_to do |format|
-          format.html { redirect_to reservations_url, alert: errorMessages[:fromPast] }
-          msg = { :status => "error", :message => errorMessages[:fromPast] }
+          format.html { redirect_to reservations_url, alert: htmlMessages[:fromPast] }
+          msg = { :status => "error", :message => jsonMessages[:fromPast] }
           format.json { render :json => msg }
         end
       elsif (isReservationsOverlaps(Reservation.where(property: prop), from, to))
         respond_to do |format|
-          format.html { redirect_to reservations_url, alert: errorMessages[:overlap] }
-          msg = { :status => "error", :message => errorMessages[:overlap] }
+          format.html { redirect_to reservations_url, alert: htmlMessages[:overlap] }
+          msg = { :status => "error", :message => jsonMessages[:overlap] }
           format.json { render :json => msg }
         end
       else
@@ -65,8 +74,9 @@ class ReservationsController < ApplicationController
 
         respond_to do |format|
           if @reservation.save
-            format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
-            format.json { render :show, status: :created, location: @reservation }
+            format.html { redirect_to @reservation, notice: htmlMessages[:success] }
+            msg = { :status => "success", :message => jsonMessages[:success] }
+            format.json { render :json => msg }
           else
             format.html { render :new }
             format.json { render json: @reservation.errors, status: :unprocessable_entity }
