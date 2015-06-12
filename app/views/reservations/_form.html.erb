@@ -1,5 +1,13 @@
 <%= form_for(@reservation, :html => {:class => 'form-horizontal', :role => "form"}) do |f| %>
 
+  <script type="text/javascript">
+    var dpOptions = {
+      format: 'YYYY-MM-DD HH:mm:ss',
+      showTodayButton: true,
+      showClear: true
+    };
+  </script>
+
   <% if @reservation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
@@ -53,11 +61,4 @@
     <%= f.submit(:class => 'btn btn-success') %>
   </div>
 
-  <script type="text/javascript">
-    var dpOptions = {
-      format: 'YYYY-MM-DD HH:mm:ss',
-      showTodayButton: true,
-      showClear: true
-    };
-  </script>
 <% end %>

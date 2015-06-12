@@ -24,10 +24,17 @@ class ReservationsController < ApplicationController
   # POST /reservations
   # POST /reservations.json
   def create
+    errorMessages = {
+      missingDate: "Missing From / To date(s)!",
+      fromGreater: "To date cannot precede From date!",
+      fromPast: "From date cannot be in the past! You can only make reservations in the future!",
+      overlap: "The property is already booked in that timeframe!"
+    }
+
     if (reservation_params[:from].empty? or reservation_params[:to].empty?)
       respond_to do |format|
-        format.html { redirect_to reservations_url, alert: "Error: missing date" }
-        msg = { :status => "error", :message => "Error: missing date" }
+        format.html { redirect_to reservations_url, alert: errorMessages[:missingDate] }
+        msg = { :status => "error", :message => errorMessages[:missingDate] }
         format.json { render :json => msg }
       end
     else
@@ -37,20 +44,20 @@ class ReservationsController < ApplicationController
 
       if (from > to)
         respond_to do |format|
-          format.html { redirect_to reservations_url, alert: "Error: from > to" }
-          msg = { :status => "error", :message => "Error: from > to" }
+          format.html { redirect_to reservations_url, alert: errorMessages[:fromGreater] }
+          msg = { :status => "error", :message => errorMessages[:fromGreater] }
           format.json { render :json => msg }
         end
       elsif (from < Time.now)
         respond_to do |format|
-          format.html { redirect_to reservations_url, alert: "Error: from < now" }
-          msg = { :status => "error", :message => "Error: from < now" }
+          format.html { redirect_to reservations_url, alert: errorMessages[:fromPast] }
+          msg = { :status => "error", :message => errorMessages[:fromPast] }
           format.json { render :json => msg }
         end
       elsif (isReservationsOverlaps(Reservation.where(property: prop), from, to))
         respond_to do |format|
-          format.html { redirect_to reservations_url, alert: "Error: overlap" }
-          msg = { :status => "error", :message => "Error: overlap" }
+          format.html { redirect_to reservations_url, alert: errorMessages[:overlap] }
+          msg = { :status => "error", :message => errorMessages[:overlap] }
           format.json { render :json => msg }
         end
       else
