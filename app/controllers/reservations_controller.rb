@@ -26,7 +26,7 @@ class ReservationsController < ApplicationController
   def create
     if (reservation_params[:from].empty? or reservation_params[:to].empty?)
       respond_to do |format|
-        format.html { redirect_to reservations_url, notice: "Error: missing date" }
+        format.html { redirect_to reservations_url, alert: "Error: missing date" }
         msg = { :status => "error", :message => "Error: missing date" }
         format.json { render :json => msg }
       end
@@ -37,19 +37,19 @@ class ReservationsController < ApplicationController
 
       if (from > to)
         respond_to do |format|
-          format.html { redirect_to reservations_url, notice: "Error: from > to" }
+          format.html { redirect_to reservations_url, alert: "Error: from > to" }
           msg = { :status => "error", :message => "Error: from > to" }
           format.json { render :json => msg }
         end
       elsif (from < Time.now)
         respond_to do |format|
-          format.html { redirect_to reservations_url, notice: "Error: from < now" }
+          format.html { redirect_to reservations_url, alert: "Error: from < now" }
           msg = { :status => "error", :message => "Error: from < now" }
           format.json { render :json => msg }
         end
       elsif (isReservationsOverlaps(Reservation.where(property: prop), from, to))
         respond_to do |format|
-          format.html { redirect_to reservations_url, notice: "Error: overlap" }
+          format.html { redirect_to reservations_url, alert: "Error: overlap" }
           msg = { :status => "error", :message => "Error: overlap" }
           format.json { render :json => msg }
         end

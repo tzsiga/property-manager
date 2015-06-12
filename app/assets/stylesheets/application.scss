@@ -25,6 +25,12 @@ body {
     form {
       padding-top: 1em;
       padding-bottom: 1em;
+
+      select {
+        background: transparent;
+        font-size: 1.1em;
+        margin-top: 0.4em;
+      }
     }
 
     .show {

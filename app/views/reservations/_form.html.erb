@@ -25,9 +25,7 @@
     </div>
     <script type="text/javascript">
       $(function () {
-        $('#reservation_from').datetimepicker({
-          format: 'YYYY-MM-DD HH:mm:ss'
-        });
+        $('#reservation_from').datetimepicker(dpOptions);
       });
     </script>
   </div>
@@ -39,9 +37,7 @@
     </div>
     <script type="text/javascript">
       $(function () {
-        $('#reservation_to').datetimepicker({
-          format: 'YYYY-MM-DD HH:mm:ss'
-        });
+        $('#reservation_to').datetimepicker(dpOptions);
       });
     </script>
   </div>
@@ -56,4 +52,12 @@
   <div class="actions">
     <%= f.submit(:class => 'btn btn-success') %>
   </div>
+
+  <script type="text/javascript">
+    var dpOptions = {
+      format: 'YYYY-MM-DD HH:mm:ss',
+      showTodayButton: true,
+      showClear: true
+    };
+  </script>
 <% end %>
