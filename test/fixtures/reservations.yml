@@ -2,12 +2,12 @@
 
 one:
   property_id: 1
-  from: 1
-  to: 1
+  from: <%= Time.zone.now %>
+  to: <%= Time.zone.now + 3600 %>
   user_id: 1
 
 two:
-  property_id: 1
-  from: 1
-  to: 1
-  user_id: 1
+  property_id: 2
+  from: <%= Time.zone.now %>
+  to: <%= Time.zone.now + 3600 %>
+  user_id: 2
