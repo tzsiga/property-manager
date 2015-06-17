@@ -27,6 +27,7 @@ class ReservationsController < ApplicationController
     htmlMessages = {
       missingDate: "Missing From / To date(s)!",
       fromGreater: "To date cannot precede From date!",
+      fromEqualTo: "To date cannot be the same as From date!",
       fromPast: "From date cannot be in the past! You can only make reservations in the future!",
       overlap: "The property is already booked in that timeframe!",
       success: "Reservation was successfully created."
@@ -35,6 +36,7 @@ class ReservationsController < ApplicationController
     jsonMessages = {
       missingDate: "Missing From / To date(s)!",
       fromGreater: "To date cannot precede From date!",
+      fromEqualTo: "To date cannot be the same as From date!",
       fromPast: "From date cannot be in the past!",
       overlap: "Not available!",
       success: "Booked!"
@@ -51,13 +53,19 @@ class ReservationsController < ApplicationController
       from = Time.parse(reservation_params[:from])
       to = Time.parse(reservation_params[:to])
 
-      if (from > to)
+      if (Time.at(from) > Time.at(to))
         respond_to do |format|
           format.html { redirect_to reservations_url, alert: htmlMessages[:fromGreater] }
           msg = { :status => "error", :message => jsonMessages[:fromGreater] }
           format.json { render :json => msg }
         end
-      elsif (from < Time.now)
+      elsif (Time.at(from) == Time.at(to))
+        respond_to do |format|
+          format.html { redirect_to reservations_url, alert: htmlMessages[:fromEqualTo] }
+          msg = { :status => "error", :message => jsonMessages[:fromEqualTo] }
+          format.json { render :json => msg }
+        end
+      elsif (Time.at(from) < Time.now)
         respond_to do |format|
           format.html { redirect_to reservations_url, alert: htmlMessages[:fromPast] }
           msg = { :status => "error", :message => jsonMessages[:fromPast] }
